@@ -39,7 +39,7 @@ while True:
   lower_bound = np.array([h_min, s_min, v_min])
   upper_bound = np.array([h_max, s_max, v_max])
 
-  mask = cv2.inRange(hsv, lower_bound, upper_bound) # nhung anh dong xu hsv nam trong khoang lower den upper thi la mau trang
+  mask = cv2.inRange(hsv, lower_bound, upper_bound) # loc nhung anh dong xu hsv nam trong khoang lower den upper thi la mau trang
   contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) # contour la ham tim duong vien
 
   coin_count = 0
@@ -53,8 +53,8 @@ while True:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2) # ve hinh chu nhat bao quanh dong xu
   cv2.putText(frame, f"Coins: {coin_count}", (10, 50), cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 1, (0, 255, 0), 2)
 
-  cv2.imshow("Frame", frame)
-  cv2.imshow("Mask", mask)
+  cv2.imshow("Frame", cv2.resize(frame, (400, 400)))
+  cv2.imshow("Mask", cv2.resize(mask, (400, 400)))
 
   if cv2.waitKey(1) & 0xFF == ord('q'):
     break
